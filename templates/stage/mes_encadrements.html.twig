@@ -1,0 +1,40 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Mes Encadrements{% endblock %}
+
+{% block body %}
+    <div class="title m-3">
+        <h1>Mes encadrements</h1>
+    </div>
+    <div class="content">
+        <table class="table table-striped">
+            <thead class="bg-warning text-center" style="font-weight:bold">
+                <td>id_etudiant</td>
+                <td>Etudiant</td>
+                <td>Sujet</td>
+                <td>Téchnologies</td>
+                <td>Déscriptions</td>
+                <td>Status</td>
+            </thead>
+            {% for myencadrement in mes_encadrements %}
+            <tbody >
+            {% if  myencadrement != null %}
+                <tr>
+                    <td class="text-center">{{ myencadrement.id }}</td>
+                    <td class=""><a href="{{path('app_show_profile',{'id':myencadrement.id})}}" style="text-decoration :none; font-size:1em; "> {{ myencadrement.getName }} {{ myencadrement.getFirstname }}</a></td>
+                    <td class="text-center">{{ myencadrement.stage.sujet }}</td>
+                    <td class="text-center">{{ myencadrement.stage.technologies }}</td> 
+                    <td class="text-center">{{ myencadrement.stage.description }}</td>
+                    <td class="text-center"><a class="btn btn-danger btn-sm {% if myencadrement.stage.validation is not null  %} disabled {% endif %}" href="{{path('app_annulation_encadrement' ,{'id':myencadrement.id})}}"> Annuler l'encadrement</a> </td>
+                </tr>
+                
+            {% endif %}
+
+             </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}
+

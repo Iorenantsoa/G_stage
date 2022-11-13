@@ -1,0 +1,41 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Toutes les stages{% endblock %}
+
+{% block body %}
+    <div class="title m-3">
+     {% if not stage_a_encadrer %}
+        <h3>Aucun stage disponible</h3>
+     {% else %}
+        <h1>Les stages disponibles </h1>{% endif %}
+    </div>
+    <div class="content">
+        <table class="table table-striped">
+            <thead class="bg-warning text-center" style="font-weight:bold">
+                <td>id_stage</td>
+                <td>Etudiant</td>
+                <td>Sujet</td>
+                <td>Déscriptions</td>
+                <td>Téchnologies</td>
+                <td>Encadrement</td>
+            </thead>
+            {% for stage_a_encadrer in stage_a_encadrer %}
+            <tbody >
+            {% if  stage_a_encadrer.getUser != null %}
+                <tr>
+                    <td class="text-center">{{ stage_a_encadrer.id }}</td>
+                    <td class="">{{ stage_a_encadrer.getUser.getName }} {{ stage_a_encadrer.getUser.getFirstname }}</td>
+                    <td class="text-center">{{ stage_a_encadrer.sujet }}</td>
+                    <td class="text-center">{{stage_a_encadrer.description }}</td>
+                    <td class="text-center">{{ stage_a_encadrer.technologies }}</td>
+                    <td><center> <a class="btn btn-sm  btn-success " href="{{path('app_valider_encadrement' , {'id': stage_a_encadrer.id })}}">Encadrer</a> </center> </td> 
+                </tr>
+            {% endif %}
+             </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}
+

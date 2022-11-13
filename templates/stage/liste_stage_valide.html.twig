@@ -1,0 +1,40 @@
+{% extends 'baseChefMention.html.twig' %}
+
+{% block title %}Tous les stages validés{% endblock %}
+
+{% block body %}
+    <div class="title m-3">
+        <h4>Tous les stages validés</h4>
+    </div>
+    <div class="content">
+        <table class="table table-striped">
+            <thead class="bg-warning text-center" style="font-weight:bold">
+                <td >id_stage</td>
+                <td>Etudiant</td>
+                <td>Encadreur</td>
+                <td>Sujet</td>
+                <td>Déscriptions</td>
+                <td>Téchnologies</td>
+            </thead>
+            {% for stage in stages %}
+            <tbody >
+            {% if  stage.getUser != null %}
+                <tr>
+                    <td class="text-center"  style="font-weight:bold">{{ stage.id }}</td>
+                    <td class="">{{ stage.getUser.getName }} {{ stage.getUser.getFirstname }}</td>
+                    <td class="text-center">{{ stage.getUser.getUser.name  }} {{ stage.getUser.getUser.firstname  }}</td>
+                    <td class="text-center">{{ stage.sujet }}</td>
+                    <td class="text-center">{{stage.description }}</td>
+                    <td class="text-center">{{ stage.technologies }}</td>
+                </tr>
+                
+            {% endif %}
+
+             </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}
+

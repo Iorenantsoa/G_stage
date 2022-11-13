@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Remarques{% endblock %}
+
+{% block body %}
+
+<div class="title mt-3  ">
+            <h2 class="text-center">Les remarques :</h2 >
+            <div  class="container center" style="margin-top:20px">
+                <center><hr class="col-4"></center>
+                
+            </div>
+        </div>
+        {% for remarque in remarques %}
+                <div class="d-flex"> 
+                    <div>
+                        <h5 ><span style="font-weight:bold">{{ remarque.title }}</span> </h5>
+                    </div>
+                    
+                       <p style="margin-left:5px;"> ({{ remarque.createdAt | format_datetime() }})</p>
+                    
+                </div>
+              
+                <div>{{ remarque.description }}</div>
+                
+            <hr class='col col-12'>
+        {% endfor %}
+        <div  class="container center" style="margin-top:50px">
+            <center><hr class="col-10"></center>
+            <center><hr class="col-8"></center>
+            <center><hr class="col-6"></center>
+            <center><hr class="col-4"></center>
+            <center><hr class="col-2"></center>
+        </div>
+   
+
+{% endblock %}

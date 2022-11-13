@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add stage{% endblock %}
+
+{% block css %}
+        *{
+                margin:0;
+                padding:0;
+        }
+        #step1{
+                background-color: #28a745;
+                border-radius:0 80% 80% 0;       
+        }
+        {# #step2{
+                background-color: #28a745;
+                border-radius:0 80% 80% 0;       
+        }
+        #step3{
+                background-color: #28a745;
+                     
+        } #}
+        
+    
+        
+{% endblock %}
+{# -----------------------------------BODY--------------------------------------------- #}
+
+{% block body %}
+    
+        
+        <div class="container col-lg-6 col-md-6 col-sm-8 col-xs-12 mt-3" style="padding:0; box-sizing: border-box;  height:75vh;overflow:hidden" >
+                <div style="width:100%">
+                        <div class="progress  text-white d-flex  justify-content-around align-items-center " style="height: 15%;width:100%">
+                                        <div class="step-col col-4" id="step1">
+                                                <h3 style="text-align:center">Step 1</h3>
+                                        </div>
+                                        <div class="step-col col-4" id="step2">
+                                                <h3 style="text-align:center">Step 2</h3>
+                                        </div>
+                                        <div class="step-col col-4" id="step3">
+                                                <h3 style="text-align:center">Step 3</h3>
+                                        </div>
+                                        
+                        </div>
+                </div>
+                <div class="form-content m-3" >
+                        <div class="form m-3"  id="form1">
+                                <h3 style="text-align:center">Information sur l'entreprise</h3>
+                                {{form_start(entrepriseForm)}}
+                                        <div class="form-group">
+                                                <label for="name">Nom de l'entreprise</label>
+                                                {{form_widget(entrepriseForm.nomEntreprise)}}
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Adresse de l'entreprise</label>
+                                                {{form_widget(entrepriseForm.adresse)}}
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Email de l'entreprise</label>
+                                                {{form_widget(entrepriseForm.email)}}
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Télephone de l'entreprise</label>
+                                                {{form_widget(entrepriseForm.telephone)}}
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Ville de l'entreprise</label>
+                                                {{form_widget(entrepriseForm.ville)}}
+                                        </div>
+                                        <center><a class="btn btn-primary m-3 col-4" id="next1">Suivant</a></center>
+                                        
+                        </div>
+                        <div class="form m-3" id="form2" >
+                                <h3 style="text-align:center">Information sur l'encadreur externe</h3>
+                                {{form_start(stageForm)}}
+                                        <div class="form-group">
+                                                <label for="name">Nom de l'encadreur externe</label>
+                                                {{form_widget(stageForm.nomEncadreurExt)}} 
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Prenom de l'encadreur externe</label>
+                                                {{form_widget(stageForm.prenomEncadreurExt)}} 
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Télephone de l'encadreur externe</label>
+                                                {{form_widget(stageForm.numeroEncadreurExt)}} 
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Email de l'encadreur externe</label>
+                                                {{form_widget(stageForm.email)}} 
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Adresse de l'encadreur externe</label>
+                                                {{form_widget(stageForm.adresseEncadreurExt)}} 
+                                        </div>
+                                        <center>
+                                                <a class="btn btn-danger m-3 col-4" id="prev1">Précédent</a>
+                                                <a class="btn btn-primary m-3 col-4" id="next2">Suivant</a>
+                                        </center>{# <input  type="submit" class="btn btn-primary  m-3 col-4" value="submit"> #}
+                        </div> 
+                        <div class="form m-3" id="form3" >
+                                <h3 style="text-align:center">Information sur la stage</h3>
+                               
+                                        <div class="form-group">
+                                                <label for="name">Sujet de la stage</label>
+                                                {{form_widget(stageForm.sujet)}} 
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Déscription du sujet</label>
+                                                {{form_widget(stageForm.description)}} 
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name">Téchnologie utilisées</label>
+                                                {{form_widget(stageForm.technologies)}} 
+                                        </div>
+                                        
+                                        <center>
+                                                <a class="btn btn-danger m-3 col-4" id="prev2">Précédent</a>
+                                                <input  name="submit" type="submit" class="btn btn-success  m-3 col-4" value="submit">
+                                        </center>
+                                       
+                                       
+                        </div>  
+                         
+                </div>
+        </div>
+
+
+
+{% endblock %}
+
+{# --------------------------------------JAVASCRIPT------------------------------------------ #}
+{% block javascript %}
+        $('#form2').fadeOut(1000)
+        $('#form3').fadeOut(1000)
+        $('#next1').click(function(){
+                $('#form1').fadeOut(1000)
+                $('#form2').fadeIn(1000)
+                $('#step1').css({'border-radius':'0','transition':'0.5s'})
+                $('#step2').css({'border-radius':'0 80% 80% 0' , 'background-color':'#28a745','transition':'1.5s'})
+        })
+        $('#prev1').click(function(){
+                $('#form1').fadeIn(1000)
+                $('#form2').fadeOut(1000)
+                $('#step1').css({'border-radius':'0 80% 80% 0','transition':'1s'})
+                $('#step2').css({'background-color':'#fff','transition':'1.3s'})
+                
+        })
+        $('#next2').click(function(){
+                $('#form2').fadeOut(1000)
+                $('#form3').fadeIn(1000)
+                $('#step2').css({'border-radius':'0','transition':'0.5s'})
+                $('#step3').css({'background-color':'#28a745','transition':'1s'})
+        })
+         $('#prev2').click(function(){
+                $('#form3').fadeOut(1000)
+                $('#form2').fadeIn(1000)
+                $('#step2').css({'border-radius':'0 80% 80% 0','transition':'1s'})
+                $('#step3').css({'background-color':'#fff','transition':'1s'})
+        })
+
+{% endblock %} 

@@ -1,0 +1,21 @@
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal_{{user.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Attribution de la note</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+           {{form_start(form , {'action': path('app_note_modal', {'id': user.id})}   )}}
+            {{form_end(form)}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Fermer</button>
+        {# <a class="btn btn-success" type="submit" >Valider</a> #}
+        
+    </div>
+  </div>
+</div>

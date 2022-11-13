@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Déposer un rapport{% endblock %}
+
+{% block body %}
+    <div class="row m-5">
+        <div class="col-sm-6 mt-3">
+            <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-center " style="font-weight:bold">Première version</h3>
+                <p class="card-text text-center">Déposer votre Première version de votre rapport ici.</p>
+                <center><a href="{{path('app_firstRapport')}}" class="btn btn-primary ">1ere Version</a></center>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-3">
+            <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-center" style="font-weight:bold">Vérsion finale</h3>
+                <p class="card-text text-center">Déposer votre dérnière version de votre rapport ici.</p>
+                <center><a href="{{path('app_lastRapport')}}" class="btn btn-success ">Version finale</a></center>
+                {# {% if app.user.ficheEvaluation.estDeploye == 0%}disabled{% endif %} #}
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

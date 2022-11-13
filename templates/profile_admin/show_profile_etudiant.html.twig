@@ -1,0 +1,143 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper mb-3">
+    <div class="container title"  style="margin-bottom:5%">
+        <center><h3 style="font-weight:bold ;margin-bottom:2%">Profile de {{user.name}} {{user.firstname}}</h3></center>
+    </div>
+    <div class="d-flex justify-content-around align-items-center mt-5" style="height:45vh">
+        <div class="photo m-4  col-4" style="object-fit:cover ; height: 100%">
+            <img class="img-fluid img-thumbnail" style=" max-width:100%; max-height:100% ;"src={{ asset('uploads/picture_profile/' ~ user.image) }} alt="picture Profile">
+        </div>
+        <div class="reseignement col-8" >
+            <table class="table ">
+                <tr>
+                    <td  style="font-weight:bold">Id :</td>
+                    <td>{{user.id}}</td>
+                </tr>
+                <tr>
+                    <td  style="font-weight:bold">Name :</td>
+                    <td>{{user.name}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">firstname :</td>
+                    <td>{{user.firstname}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">email :</td>
+                    <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Rôle :</td>
+                    <td>{% if role == "ROLE_ENSEIGNANT" %} Enseignant {% elseif role == "ROLE_USER" %} Etudiant {% elseif role == "ROLE_ADMIN" %} Administrateur{% endif %}</td>
+                </tr>
+            </table>
+            
+        </div>
+    </div>
+</div>
+{% if app.user.id == user.user.id  %}
+<div class="container mt-5 mb-5">
+    <hr style="margin-top:7%">
+     <div class="title">
+        <center><h2 style="font-weight:bold">Status de sa soutenance</h2></center>
+     </div>
+     <table class="table table-striped">
+            <thead class="bg-warning text-center" >
+                <td></td>
+                <td>Status</td>
+                <td>Fichier</td>
+                <td>Publié le </td>
+                <td>Dernière mis-à-jour</td>
+                {# <td>Vérifié par l'encadreur</td>
+                <td>Remarques</td> #}
+            </thead>
+            <tbody class="text-center">
+                <tr>
+                    <td style="font-weight:bold">Stage</td>
+                    <td>{% if user.stage ==  null or user.stage.isAFaitStage == 0 %}<b class="text-danger">Non déposé</b>{% elseif user.stage.isAFaitStage == true %}<center><b class="text-success">Déjà déposé</b><center>{% endif %}</td>
+                    <td class="text-warning">(Pas de fichier pour la stage)</td>
+                    <td>{% if user.stage ==  null or user.stage.isAFaitStage == 0 %}<b class="">---</b>{% elseif user.stage.isAFaitStage == true %}<center><b class="">{{user.stage.createdAt | format_datetime()}}</b><center>{% endif %}</td>
+                    <td>{% if user.stage ==  null or user.stage.isAFaitStage == 0 %}<b class="">---</b>{% elseif user.stage.isAFaitStage == true %}<center><b class="">{{user.stage.updatedAt | format_datetime()}}</b><center>{% endif %}</td>
+
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Présentation du projet</td>
+                    <td>{% if user.presentation ==  null or user.presentation.estDeploye == null %}<b class="text-danger">Non déposé</b>{% elseif user.presentation.estDeploye == true %}<center><b class="text-success">Déjà déposé</b><center>{% endif %}</td>
+                    <td>{% if user.presentation == null %}<b class="">---</b> {% else %}<a  style="text-decoration:none" href="{{ asset('uploads/presentation/'~ user.presentation.fichier)}}" download >{{user.presentation.fichier}}</a>{% endif %}</td>
+                    <td>{% if user.presentation ==  null or user.presentation.estDeploye == 0 %}<b class="">---</b>{% elseif user.presentation.estDeploye == true %}<center><b class="">{{user.presentation.createdAt | format_datetime()}}</b><center>{% endif %}</td>
+                    <td>{% if user.presentation ==  null or user.presentation.estDeploye == 0 %}<b class="">---</b>{% elseif user.presentation.estDeploye == true %}<center><b class="">{{user.presentation.updatedAt | format_datetime()}}</b><center>{% endif %}</td>
+                    {# <td></td>
+                    <td></td> #}
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Attestation du stage</td>
+                    <td>{% if user.attestationStage ==  null or user.attestationStage.estDeploye == 0 %}<b class="text-danger">Non déposé</b>{% elseif user.attestationStage.estDeploye == true %}<center><b class="text-success ">Déjà déposé</b></center>{% endif %}</td>
+                    <td>{% if user.attestationStage == null %}<b class="">---</b> {% else %}<a  style="text-decoration:none" href="{{ asset('uploads/attestation/'~ user.attestationStage.fichier)}}" download >{{user.attestationStage.fichier}}</a>{% endif %}</td>
+                    <td>{% if user.attestationStage ==  null or user.attestationStage.estDeploye == 0 %}<b class="">---</b>{% elseif user.attestationStage.estDeploye == true %}<center><b class="">{{user.attestationStage.createdAt | format_datetime()}}</b><center>{% endif %}</td>
+                    <td>{% if user.attestationStage ==  null or user.attestationStage.estDeploye == 0 %}<b class="">---</b>{% elseif user.attestationStage.estDeploye == true %}<center><b class="">{{user.attestationStage.updatedAt | format_datetime()}}</b><center>{% endif %}</td>
+                    {# <td></td>
+                    <td></td> #}
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Fiche d'évaluation du stage</td>
+                    <td>{% if user.ficheEvaluation ==  null or user.ficheEvaluation.estDeploye == 0 %}<b class="text-danger">Non déposé</b>{% elseif user.ficheEvaluation.estDeploye == true %}<center><b class="text-success ">Déjà déposé</b></center>{% endif %}</td>
+                    <td>{% if user.ficheEvaluation == null %}<b class="">---</b> {% else %}<a  style="text-decoration:none" href="{{ asset('uploads/ficheEvaluation/'~ user.ficheEvaluation.fichier)}}" download>{{user.ficheEvaluation.fichier}}</a>{% endif %}</td>
+                    <td>{% if user.ficheEvaluation ==  null or user.ficheEvaluation.estDeploye == 0 %}<b class="">---</b>{% elseif user.ficheEvaluation.estDeploye == true %}<center><b class="">{{user.ficheEvaluation.createdAt | format_datetime()}}</b><center>{% endif %}</td>
+                    <td>{% if user.ficheEvaluation ==  null or user.ficheEvaluation.estDeploye == 0 %}<b class="">---</b>{% elseif user.ficheEvaluation.estDeploye == true %}<center><b class="">{{user.ficheEvaluation.updatedAt | format_datetime()}}</b><center>{% endif %}</td>
+                    {# <td></td>
+                    <td></td> #}
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">1ère version du rapport </td>
+                    <td>{% if user.rapport ==  null or user.rapport.firstVersionEstDeploye == 0 %}<b class="text-danger">Non déposé</b>{% elseif user.rapport.firstVersionEstDeploye == true %}<center><b class="text-success ">Déjà déposé</b></center>{% endif %}</td>
+                     <td>{% if user.rapport == null %}<b class="">---</b> {% else %}<a  style="text-decoration:none" href="{{ asset('uploads/rapport/first_version/'~ user.rapport.firstVersion)}}" download>{{user.rapport.firstVersion}}</a>{% endif %}</td>
+                    <td>{% if user.rapport ==  null or user.rapport.isFirstVersionEstDeploye == 0 %}<b class="">---</b>{% elseif user.rapport.isFirstVersionEstDeploye == true %}<center><b class="">{{user.rapport.firstVersionCreatedAt | format_datetime()}}</b><center>{% endif %}</td>
+                    <td>{% if user.rapport ==  null or user.rapport.isFirstVersionEstDeploye == 0 %}<b class="">---</b>{% elseif user.rapport.isFirstVersionEstDeploye == true %}<center><b class="">{{user.rapport.firstVersionUpdatedAt | format_datetime()}}</b><center>{% endif %}</td>
+                    {# <td></td>
+                    <td></td> #}
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Dérnière version du rapport</td>
+                    <td>{% if user.rapport  ==  null or user.rapport.lastVersionEstDeploye == 0 %}<b class="text-danger">Non déposé</b>{% elseif user.rapport.lastVersionEstDeploye == true %}<center><b class="text-success ">Déjà déposé</b></center>{% endif %}</td>
+                    <td>{% if user.rapport == null %}<b class="">---</b> {% else %}<a  style="text-decoration:none" href="{{ asset('uploads/rapport/finale_version/'~ user.rapport.lastVersion)}}" download>{{user.rapport.lastVersion}}</a>{% endif %}</td>
+                    <td>{% if user.rapport ==  null or user.rapport.isLastVersionEstDeploye == 0 %}<b class="">---</b>{% elseif user.rapport.isLastVersionEstDeploye == true %}<center><b class="">{{user.rapport.lastVersionCreatedAt | format_datetime()}}</b><center>{% endif %}</td>
+                    <td>{% if user.rapport ==  null or user.rapport.isLastVersionEstDeploye == 0 %}<b class="">---</b>{% elseif user.rapport.isLastVersionEstDeploye == true %}<center><b class="">{{user.rapport.lastVersionUpdatedAt | format_datetime()}}</b><center>{% endif %}</td>
+                    
+                </tr>
+            </tbody>
+     </table>
+                <div style="text-align:right">
+                    <div >
+                        <a href="" class=" mt-3 btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#remarque{{user.id}}">Faire des remarques à propos de ses travails</a>
+                    </div>
+                    <div>
+                        <a href="{{path('app_list_remarque', {'id': user.id})}}" class=" mt-3 btn btn-dark btn-sm" >Liste des remarques</a>
+                    </div>
+                </div>
+                    {{ render(path('app_remarquer', {"id": user.id})) }}
+               
+                
+                
+     
+</div>
+
+{% endif %}
+<div  class="container center" style="margin-top:50px">
+    <center><hr class="col-10"></center>
+    <center><hr class="col-8"></center>
+    <center><hr class="col-6"></center>
+    <center><hr class="col-4"></center>
+    <center><hr class="col-2"></center>
+</div>
+
+
+
+{% endblock %}

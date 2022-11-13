@@ -1,0 +1,36 @@
+{% extends 'baseChefMention.html.twig' %}
+
+{% block title %}Liste{% endblock %}
+
+{% block body %}
+    <div class="title m-3">
+        <h5>Liste des étudiants avec leurs encadrants pédagogiques</h5>
+    </div>
+    <div class="content">
+        <table class="table table-striped">
+            <thead class="bg-warning text-center" style="font-weight:bold">
+                <td >id_etudiant</td>
+                <td>Nom étudiant</td>
+                <td>Prénom étudiant</td>
+                <td>Intitulé du sujet</td>
+                <td>Technologie</td>
+            </thead>
+            {% for user in users %}
+            <tbody >
+            {% if  user != null %}
+                <tr>
+                    <td class="text-center"  style="font-weight:bold">{{ user.id }}</td>
+                    <td class="text-center">{{ user.name }}</td>
+                    <td class="text-center"> {{ user.firstname }}</td>
+                    <td class="text-center"> {% if user.stage == null %} N'a pas ecore un stage {% else %} {{user.stage.sujet}} {% endif %}</td>
+                    <td class="text-center"> {% if user.stage == null %}<span class="text-danger"style="font-weight:bold"> N'a pas ecore un stage </span>{% else %} {{user.stage.technologies}} {% endif %}</td>
+                    
+            {% endif %}
+             </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}
+

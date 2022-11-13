@@ -4,7 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    picture_profile_directory: '%kernel.project_dir%/public/uploads/picture_profile'
+    rapport_first_version_directory: '%kernel.project_dir%/public/uploads/rapport/first_version'
+    rapport_last_version_directory:  '%kernel.project_dir%/public/uploads/rapport/finale_version'
+    presentation_directory : '%kernel.project_dir%/public/uploads/presentation'
+    attestation_directory : '%kernel.project_dir%/public/uploads/attestation'
+    fiche_evaluation_directory : '%kernel.project_dir%/public/uploads/ficheEvaluation'
 services:
     # default configuration for services in *this* file
     _defaults:

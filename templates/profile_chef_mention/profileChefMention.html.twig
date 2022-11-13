@@ -1,0 +1,56 @@
+{% extends 'baseChefMention.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper mb-3">
+    <div class="container title"  style="margin-bottom:5%">
+        <center><h1 style="font-weight:bold ;margin-bottom:2%">Hello {{app.user.name}}</h1></center>
+    </div>
+    <div class="d-flex justify-content-around align-items-center mt-5" style="height:45vh">
+        <div class="photo m-4  col-4" style="object-fit:cover ; height: 100%">
+            <img class="img-fluid img-thumbnail" style=" max-width:100%; max-height:100% ;"src={{ asset('uploads/picture_profile/' ~ app.user.image) }} alt="picture Profile">
+        </div>
+        <div class="reseignement col-8" >
+            <table class="table ">
+                <tr>
+                    <td  style="font-weight:bold" >Id :</td>
+                    <td>{{app.user.id}}</td>
+                </tr>
+                <tr>
+                    <td  style="font-weight:bold">Name :</td>
+                    <td>{{app.user.name}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">firstname :</td>
+                    <td>{{app.user.firstname}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">email :</td>
+                    <td>{{app.user.email}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Rôle :</td>
+                    <td>{% if role == "ROLE_ENSEIGNANT" %} Enseignant {% elseif role == "ROLE_USER" %} Etudiant {% elseif role == "ROLE_ADMIN" %} Chef de mention{% endif %}</td>
+                </tr>
+            </table>
+            <a href="{{path('app_edit_profile_chef_mention')}}" class="btn btn-primary">Edit profile</a>
+        </div>
+    </div>
+</div>
+
+<div  class="container center" style="margin-top:50px">
+    <center><hr class="col-10"></center>
+    <center><hr class="col-8"></center>
+    <center><hr class="col-6"></center>
+    <center><hr class="col-4"></center>
+    <center><hr class="col-2"></center>
+</div>
+
+{% endblock %}
+

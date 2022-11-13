@@ -1,0 +1,46 @@
+{% extends 'baseChefMention.html.twig' %}
+
+{% block title %}Liste{% endblock %}
+
+{% block body %}
+    <div class="title m-3">
+        <h4>Visualiser les notes de chaque étudiant</h4>
+    </div>
+    <div class="content">
+        <table class="table table-striped">
+            <thead class="bg-warning text-center" style="font-weight:bold">
+                <td >id_etudiant</td>
+                <td>Etudiant</td>
+                <td>Sujet</td>
+                <td>Technologies</td>
+                <td>Encadreur</td>
+                <td>Note</td>
+                <td>Mention</td>
+
+            </thead>
+            {% for user in users %}
+            <tbody >
+            {% if  user != null %}
+                <tr>
+                    <td class="text-center"  style="font-weight:bold">{{ user.id }}</td>
+                    <td class="">{{ user.name }} {{ user.firstname }}</td>
+                    <td class="text-center"> {{ user.stage.sujet }}</td>
+                    <td class="text-center"> {{ user.stage.Technologies }}</td>
+                    <td class="text-center"> {{ user.user.name }} {{ user.user.firstname }}</td>
+                    <td class="text-center"> {{ user.note }}</td>
+                    {% if user.note < 10 %}<td class="text-center"> <span class=" text-danger" style="font-weight:bold">Non validé</span></td> {% endif %}
+                    {% if user.note >= 10  and user.note < 12  %}<td class="text-center"> <span class=" text-warning" style="font-weight:bold">Passable</span></td> {% endif %}
+                    {% if user.note >= 12  and user.note < 15 %}<td class="text-center"> <span class=" text-primary" style="font-weight:bold">Assez-Bien</span></td> {% endif %}
+                    {% if user.note >= 15 and user.note < 16 %}<td class="text-center"> <span class=" text-primary" style="font-weight:bold">Bien</span></td> {% endif %}
+                    {% if user.note > 16 %}<td class="text-center"> <span class=" text-success" style="font-weight:bold">Très bien</span></td> {% endif %}
+
+            {% endif %}
+
+             </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}
+

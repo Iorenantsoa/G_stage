@@ -5,15 +5,97 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+        <link rel="stylesheet" href="{{asset('node_modules/bootstrap/dist/css/bootstrap.min.css')}}"type="text/css">
+        <link rel="stylesheet" href="{{asset('node_modules/font-awesome/css/font-awesome.min.css')}}"type="text/css">
+        <link rel="stylesheet" href="{{asset('assets/bootstrap/bootstrap.min.css')}}" type="text/css">
+        <style>
+          {% block css %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+          {% endblock %} 
+        </style>
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+
+    {% if is_granted('ROLE_USER') %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="font-size:13px">
+            <div class="container-fluid">
+              <a class=" btn  navbar-brand  text-info" style="border-right:6px dashed blue" href="#"><h5 >G_stage</h5></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                    <a class="   nav-link " href="{{path('app_add_stage')}}"  >Ajouter un stage
+                      <span class="visually-hidden">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="   nav-link "   href="{{path('app_deposerRapport')}}">Déposer un rapport</a>
+                    
+                  </li>
+              
+                  <li class="nav-item">
+                    <a class="  nav-link"   href="{{path('app_presentation')}}">Déposer la présentation</a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class=" nav-link"  href="{{path('app_attestation')}}">Déposer l'attetation du stage</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class=" nav-link"  href="{{path('app_fiche_evaluation')}}">Déposer la fiche d'evaluation</a>
+                  </li>
+                </ul>
+                <div class="d-flex " style="margin-right:2.5%;">
+                      <a href="{{path('app_show_remarque_user', {'id': app.user.id })}}"><i class="fa fa-bell"style=" font-size: 14px; color: white; font-weight:bold"></i> <span class="text-white bg-danger p-1" style="border-radius:50%  ; font-size: 12px"> {{app.user.checkRemarque}} </span></a>
+                </div>
+                <div class="d-flex " style= "margin-right:30px;">
+                      
+                      <a href="{{path('app_profile')}}" style="color:white;text-decoration:none;"><img src={{ asset('uploads/picture_profile/' ~ app.user.image) }}  alt="" style="margin-right:6px;width:30px ; height:30px;border-radius:50%;object-fit:cover;"> <span >{{app.user.name}}{{app.user.firstname}}</span></a>
+                </div>
+                <div class="d-flex">
+                    
+                      <a class="btn btn-danger btn-sm"  href=""  data-bs-toggle="modal" data-bs-target="#logout"> Déconnexion</a>
+                </div>
+                
+              </div>
+            </div>
+        </nav>
+    {% endif %}
+    <div class="container ">
+        {% for message in app.session.flashBag.get('info') %}
+            <div class="alert alert-info text-center" role="alert">
+              {{message}}
+            </div>  
+        {% endfor %}
+        {% for message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success text-center" role="alert">
+              {{message}}
+            </div>  
+        {% endfor %}
+        {% for message in app.session.flashBag.get('danger') %}
+            <div class="alert alert-danger text-center" role="alert">
+              {{message}}
+            </div>  
+        {% endfor %}
+        
+        
+        
+      {% block body %}
+
+      {% endblock %}
+      {% block fragments %}
+          {% include "fragments/_logout_fragment.html.twig" %}
+      {% endblock %}
+    </div>
+
+        <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('node_modules/bootstrap/dist/js/bootstrap.min.js')}}" type="text/javascript"></script>
+        <script type="text/javascript">
+            {% block javascript %}
+
+            {% endblock %}  
+        </script>   
     </body>
 </html>

@@ -1,0 +1,40 @@
+{% extends 'baseChefMention.html.twig' %}
+
+{% block title %}Tous les stages{% endblock %}
+
+{% block body %}
+    <div class="title m-3">
+        <h1>Tous les stages</h1>
+    </div>
+    <div class="content">
+        <table class="table table-striped">
+            <thead class="bg-warning text-center" style="font-weight:bold">
+                <td >id_stage</td>
+                <td>Etudiant</td>
+                <td>Encadreur</td>
+                <td>Sujet</td>
+                <td>Déscriptions</td>
+                <td>Téchnologies</td>
+            </thead>
+            {% for all_stage in all_stages %}
+            <tbody >
+            {% if  all_stage.getUser != null %}
+                <tr>
+                    <td class="text-center"  style="font-weight:bold">{{ all_stage.id }}</td>
+                    <td class="">{{ all_stage.getUser.getName }} {{ all_stage.getUser.getFirstname }}</td>
+                    <td class="text-center">{% if all_stage.getUser.getUser  %}{{all_stage.getUser.getUser.getName }} {{all_stage.getUser.getUser.getFirstname }} {% else %}  <span class="text-danger" style="font-weight:bold"> n'a pas encore un encadreur</span>                {% endif %}</td>
+                    <td class="text-center">{{ all_stage.sujet }}</td>
+                    <td class="text-center">{{all_stage.description }}</td>
+                    <td class="text-center">{{ all_stage.technologies }}</td>
+                </tr>
+                
+            {% endif %}
+
+             </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}
+

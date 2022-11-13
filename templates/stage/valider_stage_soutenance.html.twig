@@ -1,0 +1,52 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Valider un stage{% endblock %}
+
+{% block body %}
+    <div class="title m-3">
+        <h1>Valider un stage</h1>
+    </div>
+    <div class="content">
+        <table class="table table-striped table-responsive">
+            <thead class="bg-warning text-center" style="font-weight:bold">
+                <td>id_etudiant</td>
+                <td>Etudiant</td>
+                <td>Sujet</td>
+                <td>Téchnologies</td>
+                <td>Déscriptions</td>
+                <td>Status</td>
+            </thead>
+            {% for myencadrement in mes_encadrements %}
+            <tbody >
+            {% if  myencadrement != null %}
+                <tr>
+                    <td class="text-center">{{ myencadrement.id }}</td>
+                    {# <td class="">{{ myencadrement.getName }} {{ myencadrement.getFirstname }}</td> #}
+                    <td class=""><a href="{{path('app_show_profile',{'id':myencadrement.id})}}" style="text-decoration :none; font-size:1em;  "> {{ myencadrement.getName }} {{ myencadrement.getFirstname }}</a></td>
+                    <td class="text-center">{{ myencadrement.stage.sujet }}</td>
+                    <td class="text-center">{{ myencadrement.stage.technologies }}</td> 
+                    <td class="text-center">{{ myencadrement.stage.description }}</td>
+                    
+                        {%  if myencadrement.stage.validation == null  %}
+                            <td class="text-center"><a class="btn btn-success btn-sm" href="{{path('app_valider_stage',{'id':myencadrement.id})}}">Valider</a> <a class="btn btn-danger btn-sm" href="{{path('app_ne_pas_valider_stage',{'id':myencadrement.id})}}">Ne pas valider</a></td>
+                        
+                        {% elseif myencadrement.stage.validation != null  %}
+
+                            {% if myencadrement.stage.validation == "YES"  %} 
+                                <td class="text-center"><span class="text-success" style="font-weight:bold">Soutenance validé</span></td>
+                            {% else %}
+                                <td class="text-center"><span class="text-danger" style="font-weight:bold">Soutenance nonvalidé</span> </td>
+                            {% endif %}
+                        {% endif %}
+                </tr>
+                
+            {% endif %}
+
+             </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}
+
