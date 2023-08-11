@@ -67,7 +67,7 @@ class ProfileAdminController extends AbstractController
 
             $manager->persist($user);
             $manager->flush();
-            $this->addFlash('success','Une modification a ete effectué avec succes');
+            $this->addFlash('success','Une modification a été effectué avec succes');
             return $this->redirectToRoute('app_profile_admin');
         }
 

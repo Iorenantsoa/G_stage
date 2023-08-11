@@ -7,7 +7,7 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         <link rel="stylesheet" href="{{asset('node_modules/bootstrap/dist/css/bootstrap.min.css')}}"type="text/css">
         <link rel="stylesheet" href="{{asset('node_modules/font-awesome/css/font-awesome.min.css')}}"type="text/css">
-        <link rel="stylesheet" href="{{asset('assets/bootstrap/bootstrap.min.css')}}" type="text/css">
+        <link rel="stylesheet" href="{{asset('assets/bootstrap/bootstrap6.min.css')}}" type="text/css">
         <style>
           {% block css %}
 
@@ -20,14 +20,14 @@
     {% if is_granted('ROLE_USER') %}
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="font-size:13px">
             <div class="container-fluid">
-              <a class=" btn  navbar-brand  text-info" style="border-right:6px dashed blue" href="#"><h5 >G_stage</h5></a>
+              <a class=" btn  navbar-brand  text-white" style="border-right:6px dashed blue" href="#"><h5 >G_stage</h5></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                   <li class="nav-item">
-                    <a class="   nav-link " href="{{path('app_add_stage')}}"  >Ajouter un stage
+                    <a class="   nav-link bold font-weight-bold" href="{{path('app_add_stage')}}"  >Ajouter un stage
                       <span class="visually-hidden">(current)</span>
                     </a>
                   </li>
@@ -48,15 +48,15 @@
                   </li>
                 </ul>
                 <div class="d-flex " style="margin-right:2.5%;">
-                      <a href="{{path('app_show_remarque_user', {'id': app.user.id })}}"><i class="fa fa-bell"style=" font-size: 14px; color: white; font-weight:bold"></i> <span class="text-white bg-danger p-1" style="border-radius:50%  ; font-size: 12px"> {{app.user.checkRemarque}} </span></a>
+                      <a href="{{path('app_show_remarque_user', {'id': app.user.id })}}"><i class="fa fa-bell"style=" font-size: 14px; color: white; font-weight:bold"></i> <span class="text-white bg-danger p-1" style="border-radius:50%  ; font-size: 12px"> {% if app.user.checkRemarque is null %}0{% else %} {{app.user.checkRemarque}} {% endif %}</span></a>
                 </div>
                 <div class="d-flex " style= "margin-right:30px;">
                       
-                      <a href="{{path('app_profile')}}" style="color:white;text-decoration:none;"><img src={{ asset('uploads/picture_profile/' ~ app.user.image) }}  alt="" style="margin-right:6px;width:30px ; height:30px;border-radius:50%;object-fit:cover;"> <span >{{app.user.name}}{{app.user.firstname}}</span></a>
+                      <a href="{{path('app_profile')}}" style="color:white;text-decoration:none;"><img src={{ asset('uploads/picture_profile/' ~ app.user.image) }}  alt="" style="margin-right:6px;width:30px ; height:30px;border-radius:50%;object-fit:cover;"> <span >{{app.user.name}} {{app.user.firstname}}</span></a>
                 </div>
                 <div class="d-flex">
                     
-                      <a class="btn btn-danger btn-sm"  href=""  data-bs-toggle="modal" data-bs-target="#logout"> Déconnexion</a>
+                      <a class="btn btn-danger btn-sm"  href=""  data-bs-toggle="modal" data-bs-target="#logout"><i class=" fa fa-sign-out"></i> Déconnexion</a>
                 </div>
                 
               </div>

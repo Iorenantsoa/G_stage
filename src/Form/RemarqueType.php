@@ -20,6 +20,7 @@ class RemarqueType extends AbstractType
             ])
             ->add('description' , TextareaType::class,[
                 'label'=>'Déscription '
+                
             ])
             ->add('createdAt')
             ->add('user')

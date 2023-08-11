@@ -1,0 +1,45 @@
+{% extends 'baseChefMention.html.twig' %}
+
+{% block title %}Parametre{% endblock %}
+
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    
+</style>
+
+<div class="example-wrapper">
+    <h1>Parametres</h1>
+
+ <div class="containere row ">
+        <div class="col-sm-6 mt-3">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" style=" font-weight:bold ;text-align:center">Année universitaire</h5>
+                <p class="card-text" style="text-align : center">Ajouter une nouvelle année universitaire </p>
+                <center> <a href="#" data-bs-toggle="modal" data-bs-target="#ajout_annee_univ" class="btn btn-primary  btn-sm" >Ajouter</a></center> 
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-3">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" style=" font-weight:bold ;text-align:center">Changer un rôle</h5>
+                <p class="card-text" style="text-align : center">Changer un rôle d'un utilisateur</p>
+                <center> <a href="" data-bs-toggle="modal" data-bs-target="#config_user" class="btn btn-primary  btn-sm" >Ajouter</a></center> 
+            </div>
+            </div>
+        </div>
+</div>
+{% endblock %}
+
+{% block fragments %}
+    {% include "fragments/_config_user.html.twig" %} 
+    {% include "fragments/_ajout_annee_univ.html.twig" %}
+{% endblock %}
+{% block javascript %}
+        
+{% endblock %}
+
